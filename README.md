@@ -1,4 +1,4 @@
-# Personal-Voice-Assistant
+<h1>🤖 Personal-Voice-Assistant</h1>
 
 This project automates tasks via voice commands, including tab control, app management, system operations, Google searches, image generation, news reading, media playback, email sending, note-taking, and more. It also includes additional functionalities such as downloading videos and songs, providing an interactive interface for user interaction, and facilitating task execution with efficiency and convenience, thereby enhancing user productivity.
 
