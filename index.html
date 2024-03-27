@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natasha Romanoff</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+    <style>
+        /* Add your custom styles here if needed */
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* background color */
+            position: relative; /* Ensure proper positioning for absolute elements */
+            font-family: 'Roboto', sans-serif; /* Use Roboto font for the text */
+        }
+
+        .container {
+            position: absolute;
+            bottom: 20px; /* Adjust as needed */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Center horizontally */
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Center items vertically */
+        }
+
+        .textbox {
+            background-color: rgba(0, 0, 0, 0.5); /* black color with 50% opacity */
+            padding: 20px;
+            border: 2px solid #00ff00; /* green border */
+            border-radius: 10px;
+            color: #fff; /* white text color */
+            animation: fadeIn 1s ease forwards, bounce 2s infinite alternate; /* Add bounce animation */
+            flex: 1; /* Take remaining space */
+        }
+
+        .textbox p {
+            margin: 0;
+        }
+
+        .button-container {
+            margin-left: 10px; /* Adjust as needed */
+        }
+
+        button {
+            background-color: transparent; /* Transparent background */
+            border: 2px solid #00ff00; /* Green border */
+            color: #fff; /* White text color */
+            padding: 10px 20px; /* Padding for the button */
+            border-radius: 10px; /* Border radius */
+            cursor: pointer; /* Cursor style */
+        }
+
+        button:hover {
+            background-color: #15085E; /* Change background color on hover */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+    <script src="eel.js"></script>
+    <script>
+      // Function to update content in the HTML file
+      function updateSpokenContent(content) {
+          document.getElementById("spoken-content").textContent = content;
+      }
+
+      // Expose updateSpokenContent() function to be called from Python
+      eel.expose(updateSpokenContent);
+      async function speak(){
+        eel.interact()();
+        updateSpokenContent("Yes Sir");
+
+        listenForSpeech();
+
+      }
+      // Function to start listening for speech
+      async function listenForSpeech() {
+          updateSpokenContent("Listening..."); // Update content to indicate listening
+          const message = await eel.listen_and_send()();
+          updateSpokenContent(message);
+          // After receiving the response, start listening again
+          listenForHotKeyword();
+      }
+
+      // Function to start listening when the hot keyword is detected
+      async function listenForHotKeyword() {
+          // Start listening for the hot keyword
+          const recognition = new webkitSpeechRecognition();
+          recognition.lang = 'en-US';
+          recognition.continuous = true;
+
+          recognition.onresult = function(event) {
+              for (let i = event.resultIndex; i < event.results.length; ++i) {
+                  const transcript = event.results[i][0].transcript.toLowerCase();
+                  if (event.results[i].isFinal && (transcript.includes('natasha') || transcript.includes('terminate'))) {
+                      // If 'natasha' or 'terminate' is detected, start listening for the command or terminate
+                      if (transcript.includes('natasha')) {
+                          recognition.stop(); 
+                          //console.log("neel");
+                          speak();// Stop continuous recognition
+                      } else if (transcript.includes('terminate')) {
+                         updateSpokenContent("terminate..."); 
+                         eel.terminate()()   
+                         setTimeout(() => { window.close(); }, 7000);  // Close window after 5 seconds
+                      }
+                      return;
+                  }
+              }
+          };
+        
+         
+         
+          recognition.start();
+
+      }
+
+      // Start listening for the hot keyword initially
+      listenForHotKeyword();
+     
+  </script>
+   
+</head>
+<body>
+    
+<div class="main">
+    <div class="myCircle">
+        <div class="mainCircle">
+            <div class="circle"></div>
+            <div class="circle1"></div>
+            <div class="maincontent">
+                <ul class="bars">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container"> 
+    <div class="textbox">
+        <p id="spoken-content">Spoken content will appear here</p>
+    </div>
+    <!-- Add the button -->
+    <div class="button-container">
+        <button onclick="listenForSpeech()">Start Listening</button>
+    </div>
+</div>
+
+</body>
+</html>
