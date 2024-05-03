@@ -66,14 +66,16 @@ This project automates tasks via voice commands, including tab control, app mana
 
 ![image](https://github.com/NeelSheth-Developer/Personal-Voice-Assistant/assets/149947298/a56479bb-3e8a-40b4-996c-962b007dd527)
 
+![sp_1](https://github.com/NeelSheth-Developer/Personal-Voice-Assistant/assets/149947298/3f1b4898-0cd9-438a-ad3f-f69c556f8590)
+
+![sp_3](https://github.com/NeelSheth-Developer/Personal-Voice-Assistant/assets/149947298/84b2f8e1-7cc9-499f-a740-06296f0888ac)
+
+
 <hr>
 <h3 style="color: green;">Searching On Google</h3>
 
 ![image](https://github.com/NeelSheth-Developer/Personal-Voice-Assistant/assets/149947298/3acde201-2604-4a02-b2d5-e6809c4ffbc7)
 
-![sp_1](https://github.com/NeelSheth-Developer/Personal-Voice-Assistant/assets/149947298/3f1b4898-0cd9-438a-ad3f-f69c556f8590)
-
-![sp_3](https://github.com/NeelSheth-Developer/Personal-Voice-Assistant/assets/149947298/84b2f8e1-7cc9-499f-a740-06296f0888ac)
 
 
 
